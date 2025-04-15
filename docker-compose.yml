@@ -12,13 +12,11 @@ services:
     ports:
       - "3308:3306"
     networks:
-      - tomcat-bestwishes-network
+      - tomcat-network-bestwishes
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
       retries: 5
-
-
 
   tomcat:
     build:
@@ -37,7 +35,7 @@ services:
     ports:
       - "8086:8080"
     networks:
-      - tomcat-bestwishes-network
+      - tomcat-network-bestwishes
 
   nginx:
     image: nginx:latest
@@ -53,10 +51,10 @@ services:
     depends_on:
       - tomcat
     networks:
-      - tomcat-bestwishes-network
+      - tomcat-network-bestwishes
 
 networks:
-  tomcat-network:  # Custom network for communication between Tomcat and MySQL
+  tomcat-network-bestwishes:  # Custom network for communication between Tomcat and MySQL
     driver: bridge
 
 
