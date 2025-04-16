@@ -18,7 +18,7 @@ services:
       interval: 10s
       retries: 5
 
-  tomcat:
+   tomcat:
     build:
       context: ./Docker-file/app
     image: javaapp
@@ -27,6 +27,7 @@ services:
     depends_on:
       - db
     environment:
+      CATALINA_OPTS: "-Xms64m -Xmx128m -XX:+UseContainerSupport -XX:MaxRAMPercentage=30.0"
       MYSQL_HOST: db
       MYSQL_PORT: 3306
       MYSQL_DB: db_wishes
